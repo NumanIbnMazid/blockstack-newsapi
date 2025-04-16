@@ -6,6 +6,7 @@ import datetime
 NEWS_API_BASE_URL = "https://newsapi.org/v2"
 API_KEY = settings.NEWS_API_KEY
 
+
 async def fetch_top_headlines(country: Optional[str] = None, source: Optional[str] = None, page: int = 1):
     url = f"{NEWS_API_BASE_URL}/top-headlines"
     params = {
@@ -22,6 +23,7 @@ async def fetch_top_headlines(country: Optional[str] = None, source: Optional[st
         response = await client.get(url, params=params)
         response.raise_for_status()
         return response.json()
+
 
 async def fetch_everything(query: str, page: int = 1):
     url = f"{NEWS_API_BASE_URL}/everything"

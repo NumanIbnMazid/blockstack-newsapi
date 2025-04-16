@@ -1,0 +1,11 @@
+[flake8]
+# Ignore specific rules
+ignore = E501, E203, F401, E711, E722, E741
+
+# Max line length (default is 79 characters)
+max-line-length = 120
+
+# Select which rules to enable
+select = E, F, W, C
+
+exclude = venv,*.egg,dist

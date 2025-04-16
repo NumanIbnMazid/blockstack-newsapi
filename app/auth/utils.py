@@ -3,7 +3,6 @@ from jose import JWTError, jwt
 from fastapi import HTTPException, status, Depends
 from app.config import settings
 from fastapi.security import OAuth2PasswordBearer
-from fastapi import Depends
 
 SECRET_KEY = settings.CLIENT_SECRET
 ALGORITHM = "HS256"
@@ -34,7 +33,9 @@ def verify_token(token: str):
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token"
         )
 
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
 
 def get_current_client(token: str = Depends(oauth2_scheme)):
     return verify_token(token)

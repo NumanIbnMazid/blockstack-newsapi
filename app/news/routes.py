@@ -29,15 +29,15 @@ async def get_news(
 
 @router.post("/save-latest")
 async def save_latest_news(
-    db: Session = Depends(get_db), 
+    db: Session = Depends(get_db),
     token=Depends(get_current_client)
 ):
     data = await fetch_latest_news()
     top_3_articles = data.get("articles", [])[:3]
-    
+
     if not top_3_articles:
         raise HTTPException(status_code=404, detail="No articles found to save.")
-    
+
     saved = save_news_items(top_3_articles, db)
     return {
         "saved_count": len(saved),
@@ -85,7 +85,7 @@ async def filter_headlines(
         # Note: you can't mix this param with the sources param.
         # https://newsapi.org/docs/endpoints/top-headlines
         print("Both 'country' and 'source' provided. 'source' will be used.")
-    
+
     # source takes priority if both are provided
     data = await fetch_top_headlines(country=None if source else country, source=source)
     return [
