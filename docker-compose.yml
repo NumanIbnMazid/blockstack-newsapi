@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: newsapi_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+    volumes:
+      - .:/app
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    driver: bridge
